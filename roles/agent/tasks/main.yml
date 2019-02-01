@@ -1,5 +1,9 @@
-# - import_tasks: 'java.yml'
-#
-# - import_tasks: 'jenkins.yml'
+- import_tasks: 'java.yml'
+
+- import_tasks: 'jenkins.yml'
 
 - import_tasks: 'ansible.yml'
+
+- import_tasks: 'maven.yml'
+
+- import_tasks: 'entrypoint.yml'

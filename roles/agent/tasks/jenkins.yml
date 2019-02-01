@@ -25,24 +25,8 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
   with_items:
-    - { regexp: '^\#PermitRootLogin', line: 'PermitRootLogin no' }
-    - { regexp: '^\#RSAAuthentication', line: 'RSAAuthentication yes' }
-    - { regexp: '^\#PasswordAuthentication', line: 'PasswordAuthentication no' }
-    - { regexp: '^\#SyslogFacility', line: 'SyslogFacility AUTH' }
-    - { regexp: '^\#LogLevel', line: 'LogLevel INFO' }
-
-- name: Jenkins | ssh run directory
-  file:
-    name: /var/run/sshd
-    state: directory
-
-- name: Jenkins | ssh run directory
-  file:
-    name: /var/run/sshd
-    state: directory
-
-- name: Jenkins | ssh ENTRYPOINT file
-  template:
-    src: setup-sshd
-    dest: /usr/local/bin/setup-sshd
-    mode: 0755
+    - { regexp: '^#PermitRootLogin', line: 'PermitRootLogin no' }
+    - { regexp: '^#RSAAuthentication', line: 'RSAAuthentication yes' }
+    - { regexp: '^#PasswordAuthentication', line: 'PasswordAuthentication no' }
+    - { regexp: '^#SyslogFacility', line: 'SyslogFacility AUTH' }
+    - { regexp: '^#LogLevel', line: 'LogLevel INFO' }

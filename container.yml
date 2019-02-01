@@ -2,10 +2,10 @@ version: "2"
 settings:
   conductor:
     base: 'debian:stretch'
-  project_name: jenkins-agent
+  project_name: jenkins
 services:
   agent:
-    from: 'jenkins/ssh-slave' # test debian:stretch vs jenkins/ssh-slave
+    from: 'debian:stretch'
     roles:
       - agent
     volumes:
@@ -14,6 +14,11 @@ services:
       - /run
       - /var/run
     working_dir: "{{ jenkins_agent_home }}"
+    environment:
+      - JAVA_HOME="{{ java_open_jdk_home }}"
+      - M2_HOME="{{ maven_home }}"
+      - MAVEN_HOME="{{ maven_home }}"
+      - PATH={{ maven_home }}/bin:${PATH}
     expose: 22
-    entrypoint: [setup-sshd]
+    entrypoint: [setup-all]
 registries: {}

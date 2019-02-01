@@ -1,13 +1,8 @@
 #!/bin/bash
-
 set -ex
 
-# Usage:
-#  docker run jenkinsci/ssh-slave <public key>
-# or
-#  docker run -e "JENKINS_SLAVE_SSH_PUBKEY=<public key>" jenkinsci/ssh-slave
-
 write_key() {
+  mkdir -p /run/sshd
 	mkdir -p "${JENKINS_AGENT_HOME}/.ssh"
 	echo "$1" > "${JENKINS_AGENT_HOME}/.ssh/authorized_keys"
 	chown -Rf jenkins:jenkins "${JENKINS_AGENT_HOME}/.ssh"
@@ -25,7 +20,6 @@ if [[ $# -gt 0 ]]; then
     exec "$@"
   fi
 fi
-
 
 # ensure variables passed to docker container are also exposed to ssh sessions
 env | grep _ >> /etc/environment

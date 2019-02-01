@@ -1,0 +1,5 @@
+- name: Entrypoint | setup
+  template:
+    src: setup-all
+    dest: /usr/local/bin/setup-all
+    mode: 0755
