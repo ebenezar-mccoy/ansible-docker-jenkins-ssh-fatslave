@@ -1,0 +1,19 @@
+version: "2"
+settings:
+  conductor:
+    base: 'debian:stretch'
+  project_name: jenkins-agent
+services:
+  agent:
+    from: 'jenkins/ssh-slave' # test debian:stretch vs jenkins/ssh-slave
+    roles:
+      - agent
+    volumes:
+      - "{{ jenkins_agent_home }}"
+      - /tmp
+      - /run
+      - /var/run
+    working_dir: "{{ jenkins_agent_home }}"
+    expose: 22
+    entrypoint: [setup-sshd]
+registries: {}

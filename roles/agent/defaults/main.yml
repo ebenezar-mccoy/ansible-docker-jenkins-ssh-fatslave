@@ -1,0 +1,5 @@
+java_open_jdk_package: openjdk-8-jdk
+java_open_jdk_version: 8u181-b13-2~deb9u1
+java_open_jdk_home: /usr/lib/jvm/java-8-openjdk-amd64
+
+jenkins_agent_home: /opt/jenkins

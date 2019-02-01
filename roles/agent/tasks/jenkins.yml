@@ -1,0 +1,48 @@
+- name: Jenkins | create gorup
+  group:
+    name: jenkins
+    gid: 3666
+
+- name: Jenkins | create user
+  user:
+    name: jenkins
+    uid: 3666
+    group: jenkins
+    home: "{{ jenkins_agent_home }}"
+    shell: /bin/bash
+
+- name: Jenkins | install openssh
+  apt:
+    name: openssh-server
+    state: present
+    update_cache: true
+    autoclean: yes
+    autoremove: yes
+
+- name: Jenkins | ssh configuration
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: '^\#PermitRootLogin', line: 'PermitRootLogin no' }
+    - { regexp: '^\#RSAAuthentication', line: 'RSAAuthentication yes' }
+    - { regexp: '^\#PasswordAuthentication', line: 'PasswordAuthentication no' }
+    - { regexp: '^\#SyslogFacility', line: 'SyslogFacility AUTH' }
+    - { regexp: '^\#LogLevel', line: 'LogLevel INFO' }
+
+- name: Jenkins | ssh run directory
+  file:
+    name: /var/run/sshd
+    state: directory
+
+- name: Jenkins | ssh run directory
+  file:
+    name: /var/run/sshd
+    state: directory
+
+- name: Jenkins | ssh ENTRYPOINT file
+  template:
+    src: setup-sshd
+    dest: /usr/local/bin/setup-sshd
+    mode: 0755

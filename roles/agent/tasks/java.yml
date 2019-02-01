@@ -1,0 +1,28 @@
+- name: Java | install java
+  apt:
+    name: "{{ java_open_jdk_package }}={{ java_open_jdk_version }}"
+    state: present
+    update_cache: true
+
+- name: Java | update env
+  alternatives:
+    name: java
+    path: "{{ java_open_jdk_home }}/jre/bin/java"
+
+- name: Java | ensure defaults on etc/alternatives systems
+  file:
+    src: "{{ java_open_jdk_home }}"
+    dest: /usr/lib/jvm/default-java
+    force: true
+    state: link
+
+- name: Java | export environment variables
+  template:
+    src: jdk.sh
+    dest: /etc/profile.d/jdk.sh
+
+- name: Java | source environment variables
+  shell: source /etc/profile
+  args:
+    executable: /bin/bash
+  changed_when: false

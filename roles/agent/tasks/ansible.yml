@@ -1,0 +1,24 @@
+- name: Jenkins | install pip tools
+  apt:
+    name: python3-pip
+    state: present
+    update_cache: true
+
+- name: Ansible | link pip3 to pip
+  file:
+    src: "{{ java_open_jdk_home }}"
+    dest: /usr/lib/jvm/default-java
+    force: true
+    state: link
+
+- name: Ansible | install pip tools
+  pip:
+    executable: /usr/bin/pip3
+    name:
+      - ansible
+      - sa-ansible-container
+
+- name: Ansible | cleanup
+  apt:
+    autoclean: yes
+    autoremove: yes
