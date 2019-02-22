@@ -15,10 +15,10 @@ services:
       - /var/run
     working_dir: "{{ jenkins_agent_home }}"
     environment:
-      - JAVA_HOME="{{ java_open_jdk_home }}"
-      - M2_HOME="{{ maven_home }}"
-      - MAVEN_HOME="{{ maven_home }}"
-      - PATH={{ maven_home }}/bin:${PATH}
+      - JAVA_HOME={{ java_open_jdk_home }}
+      - M2_HOME={{ maven_home }}
+      - MAVEN_HOME={{ maven_home }}
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ maven_home }}/bin
     expose: 22
     entrypoint: [setup-all]
 registries: {}
