@@ -1,5 +1,10 @@
+- name: Maven | main directory
+  file:
+    path: /opt/maven
+    state: directory
+
 - name: Maven | download and unarchive maven
   unarchive:
     src: "http://www.apache.org/dist/maven/maven-{{ maven_major }}/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz"
-    dest: "{{ maven_home_parent_directory }}"
+    dest: /opt/maven
     copy: no

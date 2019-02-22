@@ -6,4 +6,4 @@ jenkins_agent_home: /opt/jenkins
 
 maven_major: 3
 maven_version: 3.6.0
-maven_home: /opt/maven
+maven_home: "/opt/maven/apache-maven-{{ maven_version }}"
