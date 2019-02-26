@@ -6,7 +6,7 @@
     base_image: debian:stretch
     container_name: jenkins-agent-builder
     image_namespace: nexus.cci-dev.pl/repository/docker
-    image_name: jenkins-agent-3
+    image_name: jenkins-agent
 
   pre_tasks:
     - name: Make the latest version of the base image available locally
@@ -58,7 +58,24 @@
         -c 'ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:{{ maven_home }}/bin'
         -c 'EXPOSE 22'
         -c 'ENTRYPOINT ["/usr/local/bin/setup-all"]'
-        {{ container_name }} {{ image_namespace }}/{{ image_name }}
+        {{ container_name }} {{ image_namespace }}/{{ image_name }}:{{ image_tag }}
+
+    - name: Log into private registry and force re-authorization
+      docker_login:
+        registry: nexus.cci-dev.pl
+        username: "{{ nexus_user }}"
+        password: "{{ nexus_password }}"
+        reauthorize: yes
+      tags:
+        - push
+
+    - name: Build an image and push it to a private repo
+      docker_image:
+        name: "{{ image_namespace }}/{{ image_name }}"
+        push: yes
+        tag: "{{ image_tag }}"
+      tags:
+        - push
 
     - name: Remove the container
       docker_container:
