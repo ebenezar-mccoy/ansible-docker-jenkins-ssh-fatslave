@@ -45,8 +45,6 @@
         autoclean: yes
         autoremove: yes
       delegate_to: '{{ container_name }}'
-      args:
-        warn: no
 
     - name: Commit the container
       command: >
