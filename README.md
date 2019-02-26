@@ -28,5 +28,5 @@ pip install docker
 
 ##### build ######
 ```
-ansible-playbook build-agent.yml  -e 'ansible_python_interpreter=python3' -D
+ansible-playbook build-agent.yml  -e 'ansible_python_interpreter=python3' -e 'nexus_user=svc_docker' -e 'nexus_password=secret' -e 'image_tag=semver' -D -v
 ```
