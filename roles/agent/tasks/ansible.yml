@@ -17,8 +17,3 @@
     name:
       - ansible
       - sa-ansible-container
-
-- name: Ansible | cleanup
-  apt:
-    autoclean: yes
-    autoremove: yes
