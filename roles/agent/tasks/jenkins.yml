@@ -22,11 +22,10 @@
 - name: Jenkins | ssh configuration
   lineinfile:
     dest: /etc/ssh/sshd_config
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
+    line: "{{ item }}"
   with_items:
-    - { regexp: '^#PermitRootLogin', line: 'PermitRootLogin no' }
-    - { regexp: '^#RSAAuthentication', line: 'RSAAuthentication yes' }
-    - { regexp: '^#PasswordAuthentication', line: 'PasswordAuthentication no' }
-    - { regexp: '^#SyslogFacility', line: 'SyslogFacility AUTH' }
-    - { regexp: '^#LogLevel', line: 'LogLevel INFO' }
+    - "PermitRootLogin no"
+    - "RSAAuthentication yes"
+    - "PasswordAuthentication no"
+    - "SyslogFacility AUTH"
+    - "LogLevel INFO"
