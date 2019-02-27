@@ -8,7 +8,7 @@
     name: jenkins
     uid: 3666
     group: jenkins
-    home: "{{ jenkins_agent_home }}"
+    home: "{{ jenkins_home }}"
     shell: /bin/bash
 
 - name: Jenkins | install openssh

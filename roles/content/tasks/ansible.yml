@@ -6,7 +6,7 @@
 
 - name: Ansible | link pip3 to pip
   file:
-    src: "{{ java_open_jdk_home }}"
+    src: "{{ java_home }}"
     dest: /usr/lib/jvm/default-java
     force: true
     state: link
@@ -16,4 +16,3 @@
     executable: /usr/bin/pip3
     name:
       - ansible
-      - sa-ansible-container

@@ -1,0 +1,5 @@
+- name: Clean up the container
+  apt:
+    autoclean: yes
+    autoremove: yes
+  delegate_to: '{{ container_name }}'

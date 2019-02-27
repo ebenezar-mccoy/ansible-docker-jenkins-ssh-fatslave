@@ -1,17 +1,17 @@
 - name: Java | install java
   apt:
-    name: "{{ java_open_jdk_package }}={{ java_open_jdk_version }}"
+    name: "openjdk-8-jdk={{ java_version }}"
     state: present
     update_cache: true
 
 - name: Java | update alternatives
   alternatives:
     name: java
-    path: "{{ java_open_jdk_home }}/jre/bin/java"
+    path: "{{ java_home }}/jre/bin/java"
 
 - name: Java | ensure defaults on etc/alternatives systems
   file:
-    src: "{{ java_open_jdk_home }}"
+    src: "{{ java_home }}"
     dest: /usr/lib/jvm/default-java
     force: true
     state: link

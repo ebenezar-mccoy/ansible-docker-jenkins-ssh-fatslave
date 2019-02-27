@@ -5,6 +5,6 @@
 
 - name: Maven | download and unarchive maven
   unarchive:
-    src: "http://www.apache.org/dist/maven/maven-{{ maven_major }}/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz"
+    src: "http://www.apache.org/dist/maven/maven-3/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz"
     dest: /opt/maven
     copy: no
