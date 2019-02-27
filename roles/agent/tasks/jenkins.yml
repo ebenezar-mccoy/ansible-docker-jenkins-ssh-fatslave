@@ -25,7 +25,6 @@
     line: "{{ item }}"
   with_items:
     - "PermitRootLogin no"
-    - "RSAAuthentication yes"
     - "PasswordAuthentication no"
     - "SyslogFacility AUTH"
     - "LogLevel INFO"
