@@ -1,7 +1,7 @@
 - name: Commit the container
   command: >
     docker commit
-    -c 'WORKDIR {{ jenkins_agent_home }}'
+    -c 'WORKDIR {{ jenkins_home }}'
     -c 'ENV JAVA_HOME={{ java_home }}'
     -c 'ENV M2_HOME={{ maven_home }}'
     -c 'ENV MAVEN_HOME={{ maven_home }}'
