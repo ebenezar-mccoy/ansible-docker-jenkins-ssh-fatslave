@@ -60,8 +60,8 @@
 
     - name: Add tag latest to image
       docker_image:
-        name: "{{ container_name }} {{ image_namespace }}/{{ image_name }}:{{ image_tag }}"
-        repository: "{{ container_name }} {{ image_namespace }}/{{ image_name }}:latest"
+        name: "{{ image_namespace }}/{{ image_name }}:{{ image_tag }}"
+        repository: "{{ image_namespace }}/{{ image_name }}:latest"
 
     - name: Log into private registry and force re-authorization
       docker_login:
