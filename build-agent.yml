@@ -58,6 +58,11 @@
         -c 'ENTRYPOINT ["/usr/local/bin/setup-all"]'
         {{ container_name }} {{ image_namespace }}/{{ image_name }}:{{ image_tag }}
 
+    - name: Add tag latest to image
+      docker_image:
+        name: "{{ container_name }} {{ image_namespace }}/{{ image_name }}:{{ image_tag }}"
+        repository: "{{ container_name }} {{ image_namespace }}/{{ image_name }}:latest"
+
     - name: Log into private registry and force re-authorization
       docker_login:
         registry: nexus.cci-dev.pl
@@ -71,7 +76,10 @@
       docker_image:
         name: "{{ image_namespace }}/{{ image_name }}"
         push: yes
-        tag: "{{ image_tag }}"
+        tag: "{{ item }}"
+      with_items:
+        - "{{ image_tag }}"
+        - latest
       tags:
         - push
 
