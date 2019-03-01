@@ -16,3 +16,10 @@
     executable: /usr/bin/pip3
     name:
       - ansible
+
+- name: Maven | main directory
+  file:
+    path: /var/log/ansible
+    state: directory
+    owner: jenkins
+    group jenkins
