@@ -22,4 +22,4 @@
     path: /var/log/ansible
     state: directory
     owner: jenkins
-    group jenkins
+    group: jenkins
