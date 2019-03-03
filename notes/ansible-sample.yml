@@ -1,9 +1,0 @@
-- hosts: localhost
-  connection: local
-  become: yes
-  become_method: sudo
-  gather_subset: [ 'min', 'network'  ]
-
-  tasks:
-    - debug:
-        msg: "test"
