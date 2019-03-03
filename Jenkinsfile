@@ -17,21 +17,23 @@ pipeline {
     }
     stage('Build') {
       steps {
-        withCredentials([usernamePassword( credentialsId: '2db9a2f5-7838-4646-9477-37b1a9236e5d', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
-          sh 'env'
-          ansiblePlaybook(
-            playbook: 'build-agent.yml',
-            hostKeyChecking: false,
-            colorized: true,
-            extras: '-D -v',
-            extraVars: [
-              ansible_python_interpreter: 'python3',
-              image_tag: "$BUILD_DISPLAY_NAME",
-              nexus_user: [value: "$DOCKER_USER", hidden: true],
-              nexus_password: [value: "$DOCKER_PASS", hidden: true]
-            ]
-          )
+        withCredentials([usernamePassword( credentialsId: '2db9a2f5-7838-4646-9477-37b1a9236e5d',
+        passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
+          sh 'ANSIBLE_DOCKER_USER=${env.DOCKER_USER}'
+          sh 'ANSIBLE_DOCKER_USER=${env.DOCKER_PASS}'
         }
+        ansiblePlaybook(
+          playbook: 'build-agent.yml',
+          hostKeyChecking: false,
+          colorized: true,
+          extras: '-D -v',
+          extraVars: [
+            ansible_python_interpreter: 'python3',
+            image_tag: "$BUILD_DISPLAY_NAME",
+            nexus_user: [value: "$ANSIBLE_DOCKER_USER", hidden: true],
+            nexus_password: [value: "$ANSIBLE_DOCKER_USER", hidden: true]
+          ]
+        )
       }
     }
   }
