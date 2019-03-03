@@ -32,6 +32,8 @@ pipeline {
   }
   post {
     always {
+      // debugger
+      sleep 300
       // post version setup ( on failures )
       script {
         currentBuild.displayName = "1.0.${currentBuild.number}"
