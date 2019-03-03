@@ -8,6 +8,8 @@
 
 - import_tasks: 'maven.yml'
 
+- import_tasks: 'docker.yml'
+
 - import_tasks: 'cleanup.yml'
 
 - import_tasks: 'entrypoint.yml'
