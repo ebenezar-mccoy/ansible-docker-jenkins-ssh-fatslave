@@ -17,11 +17,12 @@ pipeline {
     }
     stage('Build') {
       steps {
+        sh 'env'
         ansiblePlaybook(
           playbook: 'build-agent.yml',
           hostKeyChecking: false,
           colorized: true,
-          extras: '-D',
+          extras: '-D -vvvv',
           extraVars: [
             ansible_python_interpreter: 'python3'
           ]
