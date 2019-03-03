@@ -19,8 +19,8 @@ pipeline {
       steps {
         withCredentials([usernamePassword( credentialsId: '2db9a2f5-7838-4646-9477-37b1a9236e5d',
         passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
-          sh 'ANSIBLE_DOCKER_USER=${env.DOCKER_USER}'
-          sh 'ANSIBLE_DOCKER_USER=${env.DOCKER_PASS}'
+          sh "ANSIBLE_DOCKER_USER=${env.DOCKER_USER}"
+          sh "ANSIBLE_DOCKER_USER=${env.DOCKER_PASS}"
         }
         ansiblePlaybook(
           playbook: 'build-agent.yml',
