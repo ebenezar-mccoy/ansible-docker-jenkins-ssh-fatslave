@@ -17,8 +17,9 @@ pipeline {
     }
     stage('Build') {
       steps {
-        withCredentials([usernamePassword(credentialsId: '2db9a2f5-7838-4646-9477-37b1a9236e5d', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')])
-        sh 'env'
+        withCredentials([usernamePassword(credentialsId: '2db9a2f5-7838-4646-9477-37b1a9236e5d', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
+          sh 'env'
+        }
         ansiblePlaybook(
           playbook: 'build-agent.yml',
           hostKeyChecking: false,
