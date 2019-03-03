@@ -28,7 +28,7 @@ pipeline {
             ansible_python_interpreter: 'python3',
             image_tag: "$BUILD_DISPLAY_NAME",
             nexus_user: [value: "$DOCKER_USER", hidden: true],
-            nexus_password: [value: "$DOCKER_PASS", hidden: true],
+            nexus_password: [value: "$DOCKER_PASS", hidden: true]
           ]
           )
       }
