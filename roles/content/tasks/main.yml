@@ -1,5 +1,7 @@
 - import_tasks: 'packages.yml'
 
+- import_tasks: 'docker.yml'
+
 - import_tasks: 'java.yml'
 
 - import_tasks: 'jenkins.yml'
@@ -7,8 +9,6 @@
 - import_tasks: 'ansible.yml'
 
 - import_tasks: 'maven.yml'
-
-- import_tasks: 'docker.yml'
 
 - import_tasks: 'cleanup.yml'
 

@@ -1,14 +1,14 @@
-- name: Add Apt signing key from official docker repo
+- name: Docker | add apt signing key
   apt_key:
     url: https://download.docker.com/linux/debian/gpg
     state: present
 
-- name: add docker official repository for Debian Stretch
+- name: Docker | add repository
   apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/debian stretch stable
     state: present
 
-- name: actually install docker
+- name: Docker | install
   apt:
     name: "docker-ce"
     update_cache: yes
