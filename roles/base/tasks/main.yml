@@ -1,25 +1,25 @@
-- name: Make the latest version of the base image available locally
+- name: Prepare | make the latest version of the base image available locally
   docker_image:
     name: '{{ base_image }}'
     force: yes
 
-- name: Create the Docker container
+- name: Prepare | create the Docker container
   docker_container:
     image: '{{ base_image }}'
     name: '{{ container_name }}'
     command: sleep infinity
 
-- name: Add the newly created container to the inventory
+- name: Prepare | add the newly created container to the inventory
   add_host:
     hostname: '{{ container_name }}'
     ansible_connection: docker
 
-- name: Ensure Python is installed
+- name: Prepare | ensure Python is installed
   raw: >
     apt-get update &&
     apt-get install -y --no-install-recommends python3
   delegate_to: '{{ container_name }}'
 
-- name: Gather facts inside the container
+- name: Prepare | gather facts inside the container
   setup:
   delegate_to: '{{ container_name }}'

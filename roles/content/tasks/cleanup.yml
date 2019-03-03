@@ -1,4 +1,4 @@
-- name: Clean up the container
+- name: Cleanup | clean up the container
   apt:
     autoclean: yes
     autoremove: yes

@@ -1,4 +1,4 @@
-- name: Commit the container
+- name: Post | commit the container
   command: >
     docker commit
     -c 'WORKDIR {{ jenkins_home }}'
@@ -11,7 +11,7 @@
     -c 'ENTRYPOINT ["/usr/local/bin/setup-all"]'
     {{ container_name }} {{ image_namespace }}/{{ image_name }}:{{ image_tag }}
 
-- name: Log into registry
+- name: Post | log into registry
   docker_login:
     registry: nexus.cci-dev.pl
     username: "{{ nexus_user }}"
@@ -20,7 +20,7 @@
   tags:
     - push
 
-- name: Push it to repo
+- name: Post | push it to repo
   docker_image:
     name: "{{ image_namespace }}/{{ image_name }}"
     push: yes
@@ -28,7 +28,7 @@
   tags:
     - push
 
-- name: Add tag latest to image
+- name: Post | add tag latest to image
   docker_image:
     name: "{{ image_namespace }}/{{ image_name }}:{{ image_tag }}"
     repository: "{{ image_namespace }}/{{ image_name }}:latest"
@@ -37,7 +37,7 @@
   tags:
     - latest
 
-- name: Remove the container
+- name: Post | remove the container
   docker_container:
     name: '{{ container_name }}'
     state: absent
