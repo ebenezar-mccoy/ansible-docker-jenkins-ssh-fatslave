@@ -22,7 +22,10 @@ pipeline {
           playbook: 'build-agent.yml',
           hostKeyChecking: false,
           colorized: true,
-          extras: '-DC')
+          extraVars {
+            extraVar("ansible_python_interpreter", "python3", false)
+          }
+          extras: '-D')
       }
     }
   }
