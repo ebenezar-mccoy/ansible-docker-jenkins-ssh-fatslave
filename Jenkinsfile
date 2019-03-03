@@ -4,7 +4,6 @@ pipeline {
   }
   options {
     timestamps()
-    checkoutToSubdirectory 'roles/base'
     ansiColor('xterm')
   }
   stages {
