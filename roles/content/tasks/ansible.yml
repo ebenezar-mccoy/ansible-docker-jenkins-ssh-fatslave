@@ -16,6 +16,7 @@
     executable: /usr/bin/pip3
     name:
       - ansible
+      - docker
 
 - name: Maven | main directory
   file:
